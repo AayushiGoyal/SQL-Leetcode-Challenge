@@ -77,3 +77,11 @@ select *
 from t1 join t2
 on t1.ad_id = t2.ad) a
 order by ctr desc, ad_id
+
+
+
+->select ad_id,
+    ifnull(round(sum(action ='Clicked')/sum(action !='ignored') *100,2),0) ctr
+from ads
+group by ad_id
+order by ctr desc, ad_id
